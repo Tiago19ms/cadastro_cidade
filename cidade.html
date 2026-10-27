@@ -1,0 +1,54 @@
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Cadastro de Cidades</h1>
+
+  <form [formGroup]="formulario" (ngSubmit)="cadastrar()" class="card p-4 mb-4">
+    <div class="mb-3">
+      <label class="form-label">Nome da cidade</label>
+      <input type="text" class="form-control" formControlName="nome">
+      <small class="text-danger" *ngIf="formulario.get('nome')?.touched && formulario.get('nome')?.invalid">
+        Informe o nome da cidade.
+      </small>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Estado</label>
+      <input type="text" class="form-control" formControlName="estado">
+      <small class="text-danger" *ngIf="formulario.get('estado')?.touched && formulario.get('estado')?.invalid">
+        Informe o estado.
+      </small>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">População</label>
+      <input type="number" class="form-control" formControlName="populacao">
+    </div>
+
+    <div class="form-check mb-3">
+      <input type="checkbox" class="form-check-input" id="capital" formControlName="capital">
+      <label class="form-check-label" for="capital">É uma capital?</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Cadastrar cidade</button>
+  </form>
+
+  <h2 class="mb-3">Cidades cadastradas</h2>
+
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let cidade of cidades">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ cidade.nome }}</h5>
+          <p class="card-text">Estado: {{ cidade.estado }}</p>
+          <p class="card-text">População: {{ cidade.populacao }}</p>
+          <p class="card-text">
+            Capital: {{ cidade.capital ? 'Sim' : 'Não' }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p *ngIf="cidades.length === 0" class="text-muted">
+    Nenhuma cidade cadastrada.
+  </p>
+</div>
